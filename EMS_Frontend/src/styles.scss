@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+
+$error-color: red;
+
+@mixin custom-background {
+    background: #84fab0;
+    /* Fallback for older browsers */
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+
+}
+
+@mixin custom-border {
+    border-color: rgb(111, 206, 145)!important;
+    border-color: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))!important;
+    border-color: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))!important;
+}
+
+@mixin customer-color {
+    color: rgb(111, 206, 145);
+    color: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+    color: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

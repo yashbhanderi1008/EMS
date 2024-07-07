@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-between">
+    <mat-form-field class="my-3">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+    <mat-card-actions>
+        <button mat-button color="primary" class="fs-4 p-3" data-bs-toggle="modal" data-bs-target="#addEventModal">Add
+            Event</button>
+    </mat-card-actions>
+</div>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+        <div matColumnDef="no">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+            <td mat-cell *matCellDef="let row; let i = index"> {{i+1}} </td>
+        </div>
+
+        <div matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name of Event </th>
+            <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+        </div>
+
+        <div matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date of Event </th>
+            <td mat-cell *matCellDef="let row"> {{row.date | date}} </td>
+        </div>
+
+        <div matColumnDef="location">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Location of Event </th>
+            <td mat-cell *matCellDef="let row"> {{row.location}} </td>
+        </div>
+
+        <div matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="ps-4"> Actions </th>
+            <td mat-cell *matCellDef="let row">
+                <button mat-icon-button color="primary" data-bs-toggle="modal" data-bs-target="#addEventModal" (click)="onEditEvent(row)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="onDeleteEvent(row)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </div>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+
+
+<div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title my-auto" id="addEventModalLabel">Add Event</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #btnClose></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="eventForm" (ngSubmit)="onEventSubmit()">
+                    <mat-form-field appearance="fill" class="w-100 my-2">
+                        <mat-label>Event Name</mat-label>
+                        <input matInput formControlName="name" placeholder="Ex. Summer Picnic">
+                        <mat-error>Event Name is required</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="w-100 my-2">
+                        <mat-label>Event Description</mat-label>
+                        <textarea matInput formControlName="description"
+                            placeholder="Ex. Join us for a fun summer picnic..."></textarea>
+                        <mat-error> Event Description is required</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="w-100 my-2">
+                        <mat-label>Event Date</mat-label>
+                        <input matInput formControlName="date" type="date">
+                        <mat-error>Event Date is required</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="w-100 my-2">
+                        <mat-label>Event Location</mat-label>
+                        <input matInput formControlName="location" placeholder="Ex. Central Park, New York">
+                        <mat-error>Event Location is required</mat-error>
+                    </mat-form-field>
+
+                    <div class="d-flex justify-content-end">
+                        <button mat-button color="primary" type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-info">
+    <div class="container-fluid">
+        <a class="navbar-brand fs-2 mx-3">EMS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-3">
+                    <a class="nav-link fs-5" [class.active]="currentComponent === 'home'"
+                        (click)="showComponent('home')">Home</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link fs-5" [class.active]="currentComponent === 'events'"
+                        (click)="showComponent('events')">Events</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link fs-5" [class.active]="currentComponent === 'myEvents'"
+                        (click)="showComponent('myEvents')">My Events</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div *ngIf="currentComponent === 'home'">
+                <app-home [events]="events"></app-home>
+            </div>
+            <div *ngIf="currentComponent === 'events'">
+                <app-events></app-events>
+            </div>
+            <div *ngIf="currentComponent === 'myEvents'">
+                <app-my-events></app-my-events>
+            </div>
+        </div>
+    </div>
+</div>

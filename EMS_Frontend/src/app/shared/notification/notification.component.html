@@ -1,0 +1,4 @@
+<div *ngIf="message"
+    [ngClass]="{'alert': true, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error', 'hidden': !message}" class="notification">
+    {{ message.message }}
+</div>
